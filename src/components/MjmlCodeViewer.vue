@@ -1,7 +1,7 @@
 <template>
   <div class="h-100">
     <nav class="navbar navbar-dark bg-dark navbar-expand mt-3">
-      <ul class="navbar-nav">
+      <ul class="navbar-nav w-100">
         <li class="nav-item">
           <a class="nav-link" :class="[view === 'mjml' ? 'active' : '']" href="#" @click.prevent="view = 'mjml'">MJML</a>
         </li>
@@ -11,8 +11,11 @@
         <li class="nav-item">
           <a class="nav-link" :class="[view === 'live' ? 'active' : '']" href="#" @click.prevent="view = 'live';createHtml()">Live preview</a>
         </li>
-
+        <li class="nav-item ml-auto">
+          <a class="nav-link" href="#" @click.prevent="createHtml()">Refresh</a>
+        </li>
       </ul>
+
     </nav>
 
     <textarea name="" class="bg-dark text-white p-3 w-100" rows="30" v-model="valueString" v-show="view == 'mjml'">
@@ -20,7 +23,7 @@
     </textarea>
     <textarea name="" class="bg-dark text-white p-3 w-100" rows="30" v-model="htmlCode" v-show="view == 'html'"></textarea>
 
-    <iframe class="w-100" :srcdoc="htmlCode" v-show="view == 'live'"></iframe>
+    <iframe class="w-100" :srcdoc="htmlCode" v-show="view == 'live'" height="800px"></iframe>
   </div>
 </template>
 

@@ -16,7 +16,8 @@
           <BlocOptions :bloc="element"/>
         </div>
         <draggable-blocs v-if="element.tasks" :tasks="element.tasks" class="pt-5" :class="element.childWrapperClass" />
-        <textarea v-if="element.content !== false" name="" id="" class="form-control mt-5" rows="10" v-model="element.content"></textarea>
+        <textarea v-if="element.tag === 'mj-text'" name="" id="" class="form-control mt-3" rows="10" v-model="element.content"></textarea>
+        <img v-if="element.tag === 'mj-image'" src="https://via.placeholder.com/80" alt="" class="mt-3">
       </div>
     </template>
   </draggable>
