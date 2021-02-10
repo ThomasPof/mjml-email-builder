@@ -570,21 +570,30 @@ const store = createStore({
       remove (state, idx) {
          console.log('id to delete',idx)
          console.log('list',state.list)
+
+         // for (let el of state.list) {
+            // console.log(state.list.find(x => x.id === idx));
+         // }
          // state.list.splice(idx, 1);
 
-         // function findElement(all,idx) {
-         //    for (let item of Object.values(all)) {
-         //       if(item.id === idx) {
-         //          all.splice
-         //       }
-         //    }
-
-         // }
+         function findElement(all,idx) {
+            for (let index in all) {
+               console.log('index',all[index])
+               console.log('idx',idx)
+               if(all[index].id === idx) {
+                  all.splice(index,1)
+                  break
+               } else {
+                  findElement(all[index].tasks,idx)
+               }
+            }
+         }
+         findElement(state.list,idx)
       },
-      add(state, element) {
+      addComponent(state, element) {
          console.log('Added Element',element)
          let tempEl = cloneDeep(store.getters.getModelByTag(element.tag))
-         let id = cloneDeep(state.currentId)
+         tempEl.id = cloneDeep(state.currentId)
          tempEl.id = id
          state.list.push(tempEl)
          state.currentId++
