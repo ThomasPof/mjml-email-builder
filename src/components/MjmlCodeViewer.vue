@@ -71,7 +71,7 @@ export default {
     createHtml() {
 
       axios.post("https://api.mjml.io/v1/render", {
-        "mjml":"<mjml><mj-body>"+ this.valueString +"<mj-section><mj-column><mj-text>LAILA</mj-text></mj-column></mj-section></mj-body></mjml>"
+        "mjml":"<mjml><mj-body>"+ this.valueString + "</mj-body></mjml>"
       }, {
         auth: {
           username: "cbead1cc-fbef-4171-ad13-67069525c4d6",

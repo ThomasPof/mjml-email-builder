@@ -19,6 +19,7 @@
                   </button>
                 </div>
                 <div class="modal-body">
+                  {{ bloc.id }}
                   <form action="">
                     <div class="form-group" v-for="(option, index) in bloc.options" :key="index">
                       <label>{{ option.attribute }}</label>
