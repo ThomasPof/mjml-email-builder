@@ -40,9 +40,7 @@ export default {
   },
   data() {
     return {
-      mjmlCode: "",
       htmlCode:"",
-      activeNames:"",
       view: 'mjml',
     };
   },
