@@ -6,22 +6,22 @@
           <a class="nav-link" :class="[view === 'mjml' ? 'active' : '']" href="#" @click.prevent="view = 'mjml'">MJML</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" :class="[view === 'html' ? 'active' : '']" href="#" @click.prevent="view = 'html';createHtml()">HTML code</a>
+          <a class="nav-link" :class="[view === 'html' ? 'active' : '']" href="#" @click.prevent="view = 'html';">HTML code</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" :class="[view === 'live' ? 'active' : '']" href="#" @click.prevent="view = 'live';createHtml()">Live preview</a>
+          <a class="nav-link" :class="[view === 'live' ? 'active' : '']" href="#" @click.prevent="view = 'live';">Live preview</a>
         </li>
         <li class="nav-item ml-auto">
-          <a class="nav-link" href="#" @click.prevent="createHtml()">Refresh</a>
+          <a class="nav-link" href="#" @click.prevent="createHtml(mjmlCode)">Refresh</a>
         </li>
       </ul>
 
     </nav>
 
-    <textarea name="" class="bg-dark text-white p-3 w-100" rows="30" v-model="valueString" v-show="view == 'mjml'">
+    <textarea name="" class="form-control bg-dark text-white p-3 w-100" rows="30" v-model="mjmlCode" v-show="view == 'mjml'">
 
     </textarea>
-    <textarea name="" class="bg-dark text-white p-3 w-100" rows="30" v-model="htmlCode" v-show="view == 'html'"></textarea>
+    <textarea name="" class="form-control bg-dark text-white p-3 w-100" rows="30" v-model="htmlCode" v-show="view == 'html'"></textarea>
 
     <iframe class="w-100" :srcdoc="htmlCode" v-show="view == 'live'" height="800px"></iframe>
   </div>
@@ -45,7 +45,7 @@ export default {
     };
   },
   computed: {
-    valueString() {
+    mjmlCode() {
       let tempCode = "";
       function generateTag(el) {
         for (let val of Object.values(el)) {
@@ -67,14 +67,17 @@ export default {
       return generateTag(Object.values(this.tasks))
     },
   },
-  updated() {
-    // console.log(this.valueString);
+  watch: {
+    mjmlCode(newValue) {
+      console.log('update')
+      this.createHtml(newValue)
+    }
   },
   methods: {
-    createHtml() {
+    createHtml(mjml) {
 
       axios.post("https://api.mjml.io/v1/render", {
-        "mjml":"<mjml><mj-body>"+ this.valueString + "</mj-body></mjml>"
+        "mjml":"<mjml><mj-body>"+ mjml + "</mj-body></mjml>"
       }, {
         auth: {
           username: "cbead1cc-fbef-4171-ad13-67069525c4d6",
@@ -88,3 +91,9 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+iframe {
+  background-color: white;
+}
+</style>
