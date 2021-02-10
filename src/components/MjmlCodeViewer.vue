@@ -1,6 +1,6 @@
 <template>
   <div class="h-100">
-    <nav class="navbar navbar-dark bg-dark navbar-expand mt-3">
+    <nav class="navbar navbar-dark bg-dark navbar-expand">
       <ul class="navbar-nav w-100">
         <li class="nav-item">
           <a class="nav-link" :class="[view === 'mjml' ? 'active' : '']" href="#" @click.prevent="view = 'mjml'">MJML</a>

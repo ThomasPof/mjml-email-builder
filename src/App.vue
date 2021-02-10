@@ -1,21 +1,48 @@
 <template>
-  <div>
-    <Builder/>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-auto bg-light min-vh-100">
+        <sidebar/>
+      </div>
+      <div class="col">
+        <div class="row">
+          <div class="col-6 max-vh-100">
+            <draggable-blocs :tasks="list"/>
+          </div>
+          <div class="col-6 vh-100 py-3">
+            <mjml-code-viewer :tasks="list"/>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-import Builder from './components/Builder.vue';
+import DraggableBlocs from "./components/DraggableBlocs.vue";
+import MjmlCodeViewer from "./components/MjmlCodeViewer.vue";
+import Sidebar from "./components/Sidebar.vue";
 
 export default {
   name: "App",
   components: {
-    Builder,
+    DraggableBlocs,
+    MjmlCodeViewer,
+    Sidebar
+  },
+  computed: {
+    list () {
+      return this.$store.state.list
+    },
   },
 }
 </script>
 
 <style lang="scss">
-  /* @import "./assets/scss/_variables.scss"; */
-  @import "../node_modules/bootstrap/scss/bootstrap.scss";
+@import "../node_modules/bootstrap/scss/bootstrap.scss";
+
+.max-vh-100 {
+  max-height: 100vh;
+  overflow: scroll;
+}
 </style>
