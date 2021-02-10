@@ -86,6 +86,7 @@ export default {
     mjmlCode(newValue) {
       console.log('update')
       window.localStorage.setItem('savedLayout',JSON.stringify(this.$store.state.list));
+      window.localStorage.setItem('savedId',JSON.stringify(this.$store.state.currentId));
       this.createHtml(newValue)
     }
   },
@@ -120,7 +121,8 @@ export default {
   },
   mounted() {
     let savedLayout = window.localStorage.getItem('savedLayout');
-    this.$store.commit('loadSavedLayout',JSON.parse(savedLayout))
+    let savedId = window.localStorage.getItem('savedId');
+    this.$store.commit('loadSavedLayout',JSON.parse(savedLayout),savedId)
 
     window.onresize = this.resize;
     window.onload = this.resize();

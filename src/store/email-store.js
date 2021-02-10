@@ -893,8 +893,9 @@ const store = createStore({
          state.list.push(tempEl)
          state.currentId++
       },
-      loadSavedLayout(state, savedLayout) {
+      loadSavedLayout(state, savedLayout, savedId) {
          state.list = savedLayout
+         state.currentId = savedId
       }
    },
    getters: {
