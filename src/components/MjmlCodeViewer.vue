@@ -9,10 +9,10 @@
           <a class="nav-link small" :class="[view === 'html' ? 'active' : '']" href="#" @click.prevent="view = 'html';">HTML</a>
         </li>
         <li class="nav-item ml-auto">
-          <a class="nav-link small" :class="[view === 'live' && size === '800' ? 'active' : '']" href="#" @click.prevent="view = 'live';size='800'">Desktop</a>
+          <a class="nav-link small" :class="[view === 'live' && size === 800 ? 'active' : '']" href="#" @click.prevent="view = 'live';size=800">Desktop</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link small" :class="[view === 'live' && size === '320' ? 'active' : '']" href="#" @click.prevent="view = 'live';size='320'">Mobile</a>
+          <a class="nav-link small" :class="[view === 'live' && size === 320 ? 'active' : '']" href="#" @click.prevent="view = 'live';size=320">Mobile</a>
         </li>
         <li class="nav-item">
           <a class="nav-link small" href="#" @click.prevent="createHtml(mjmlCode)">Refresh</a>
@@ -84,9 +84,10 @@ export default {
 
     },
     mjmlCode(newValue) {
-      console.log('update')
+      // console.log('update')
       window.localStorage.setItem('savedLayout',JSON.stringify(this.$store.state.list));
-      window.localStorage.setItem('savedId',JSON.stringify(this.$store.state.currentId));
+      window.localStorage.setItem('savedId',this.$store.state.currentId);
+      console.log(this.$store.state)
       this.createHtml(newValue)
     }
   },
@@ -106,14 +107,14 @@ export default {
     },
     resize() {
       let iframe = document.querySelector('iframe')
-      let wrapperWidth = document.querySelector('#iframeWrapper').offsetWidth
+      // let wrapperWidth = document.querySelector('#iframeWrapper').offsetWidth
       // let iframeScale = 1;
 
-      if(wrapperWidth < this.size) {
-        console.log('trop petit')
+      // if(wrapperWidth < this.size) {
+        // console.log('trop petit')
         // iframeScale = wrapperWidth / this.size ;
-      }
-      console.log('ok')
+      // }
+      // console.log('ok')
       // iframe.style.transform = "scale("+ iframeScale +")"
       iframe.setAttribute('width',this.size)
       iframe.style.height = window.innerHeight - document.querySelector('#preview-navbar').offsetHeight + 'px';
@@ -122,7 +123,9 @@ export default {
   mounted() {
     let savedLayout = window.localStorage.getItem('savedLayout');
     let savedId = window.localStorage.getItem('savedId');
-    this.$store.commit('loadSavedLayout',JSON.parse(savedLayout),savedId)
+    if(savedId && savedLayout) {
+      this.$store.commit('loadSavedLayout',{list:JSON.parse(savedLayout),id: savedId})
+    }
 
     window.onresize = this.resize;
     window.onload = this.resize();

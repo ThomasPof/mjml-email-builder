@@ -850,6 +850,7 @@ const store = createStore({
          tempEl.id = cloneDeep(state.currentId)
          state.list.push(tempEl)
          state.currentId++
+         console.log(state.currentId)
       },
       addLayout(state, layout) {
          console.log('Added Layout',layout)
@@ -881,9 +882,10 @@ const store = createStore({
          state.list.push(tempEl)
          state.currentId++
       },
-      loadSavedLayout(state, savedLayout, savedId) {
-         state.list = savedLayout
-         state.currentId = savedId
+      loadSavedLayout(state, data) {
+         state.list = data.list
+         console.log('parseInt in store',data.id)
+         state.currentId = parseInt(data.id)
       }
    },
    getters: {
