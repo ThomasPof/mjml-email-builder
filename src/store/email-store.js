@@ -828,7 +828,8 @@ const store = createStore({
                },
             ]
          }
-      }
+      },
+
    },
    mutations: {
       remove (state, idx) {
@@ -892,6 +893,9 @@ const store = createStore({
          state.list.push(tempEl)
          state.currentId++
       },
+      loadSavedLayout(state, savedLayout) {
+         state.list = savedLayout
+      }
    },
    getters: {
       getModelByTag:  (state) => (tag) => {

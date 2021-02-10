@@ -18,9 +18,8 @@
 
     </nav>
 
-    <textarea name="" class="form-control bg-dark text-white p-3 w-100" rows="30" v-model="mjmlCode" v-show="view == 'mjml'">
+    <textarea name="" class="form-control bg-dark text-white p-3 w-100" rows="30" v-model="mjmlCode" v-show="view == 'mjml'"></textarea>
 
-    </textarea>
     <textarea name="" class="form-control bg-dark text-white p-3 w-100" rows="30" v-model="htmlCode" v-show="view == 'html'"></textarea>
 
     <iframe class="w-100" :srcdoc="htmlCode" v-show="view == 'live'" height="800px"></iframe>
@@ -70,6 +69,7 @@ export default {
   watch: {
     mjmlCode(newValue) {
       console.log('update')
+      window.localStorage.setItem('savedLayout',JSON.stringify(this.$store.state.list));
       this.createHtml(newValue)
     }
   },
@@ -89,6 +89,10 @@ export default {
       })
     }
   },
+  mounted() {
+    let savedLayout = window.localStorage.getItem('savedLayout');
+    this.$store.commit('loadSavedLayout',JSON.parse(savedLayout))
+  }
 };
 </script>
 
