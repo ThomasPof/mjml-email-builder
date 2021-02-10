@@ -2,6 +2,7 @@
   <div>
     <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
       <button type="button" class="btn btn-outline-secondary" @click="showModal = true">Edit</button>
+      <button type="button" class="btn btn-outline-secondary" @click="duplicate(bloc)">Copy</button>
       <button type="button" class="btn btn-outline-secondary" @click="remove(bloc.id)">X</button>
     </div>
 
@@ -67,6 +68,9 @@ export default {
       console.log(id)
       this.$store.commit('remove',id)
     },
+    duplicate(bloc){
+      this.$store.commit('duplicate',bloc)
+    }
   },
 };
 </script>

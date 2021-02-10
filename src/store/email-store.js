@@ -1,4 +1,5 @@
 import { createStore } from "vuex"
+import cloneDeep from 'lodash.clonedeep'
 
 const store = createStore({
    state:{
@@ -9,6 +10,8 @@ const store = createStore({
          'mj-section': {
             name: "Section",
             tag: "mj-section",
+            selClass: "",
+            childWrapperClass: "d-flex",
             options: [
                {
                'attribute': 'background-color',
@@ -149,18 +152,24 @@ const store = createStore({
          'mj-column' : {
             name: "Colonne",
             tag: "mj-column",
+            selClass: "flex flex-fill",
+            childWrapperClass: "",
             options: [],
             tasks: []
          },
          'mj-text' : {
             name: "Texte",
             tag: "mj-text",
+            selClass: "flex flex-fill",
+            childWrapperClass: "",
             options: [],
             tasks: []
          },
          'mj-image' : {
             name: "Image",
             tag: "mj-image",
+            selClass: "flex flex-fill",
+            childWrapperClass: "",
             options: [],
             tasks: []
          }
@@ -183,8 +192,16 @@ const store = createStore({
       },
       add(state, element) {
          console.log('Added Element',element)
-         let tempEl = JSON.parse(JSON.stringify(store.getters.getModelByTag(element.tag)))
-         let id = JSON.parse(JSON.stringify(state.currentId))
+         let tempEl = cloneDeep(store.getters.getModelByTag(element.tag))
+         let id = cloneDeep(state.currentId)
+         tempEl.id = id
+         state.list.push(tempEl)
+         state.currentId++
+      },
+      duplicate(state, bloc) {
+         console.log('duplicate Element')
+         let tempEl = cloneDeep(bloc)
+         let id = cloneDeep(state.currentId)
          tempEl.id = id
          state.list.push(tempEl)
          state.currentId++

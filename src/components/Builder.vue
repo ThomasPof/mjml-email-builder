@@ -5,17 +5,8 @@
         <p class="font-weight-bold px-2 pt-3 pb-2 mb-0">Composants</p>
         <nav class="navbar navbar-light bg-light flex-column">
           <ul class="navbar-nav">
-            <li class="nav-item">
-              <a href="#" class="nav-link" @click.prevent="add('mj-section', '','d-flex')">Add section</a>
-            </li>
-            <li class="nav-item">
-              <a href="#" class="nav-link" @click.prevent="add('mj-column', 'flex flex-fill','')">Add column</a>
-            </li>
-            <li class="nav-item">
-              <a href="#" class="nav-link" @click.prevent="add('mj-text')">Add text/html content</a>
-            </li>
-            <li class="nav-item">
-              <a href="#" class="nav-link" @click.prevent="add('mj-image')">Add image content</a>
+            <li class="nav-item" v-for="component in mjmlComponents" :key="component">
+              <a href="#" class="nav-link" @click.prevent="add(component.tag)">{{ component.name }}</a>
             </li>
           </ul>
         </nav>
@@ -61,6 +52,9 @@ export default {
   computed: {
     list () {
       return this.$store.state.list
+    },
+    mjmlComponents() {
+        return this.$store.state.mjmlComponents
     },
     valueString() {
       return JSON.stringify(this.list, null, 2);

@@ -13,7 +13,6 @@
       <div class="m-3 border border-secondary bg-white rounded-sm position-relative" :class="element.selfStyle">
         <div class="position-absolute text-gray-600 p-3 d-flex align-items-center justify-content-between w-100" style="top:0; left:0px">
           <p class="text-gray-600 my-0">{{ element.name }}</p>
-          {{ element.id }}
           <BlocOptions :bloc="element"/>
         </div>
         <draggable-blocs :tasks="element.tasks" class="pt-5" :class="element.wrapperStyle"/>
