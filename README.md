@@ -28,4 +28,3 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 - possiblité de renommer les sections dasn la colonne centrale pour les retrouver
 - possibilité de les plier (genre flèche accordéon)
 - j'arrive pas à drag directement de la colonne de gauche au milieu
-- preview mobile

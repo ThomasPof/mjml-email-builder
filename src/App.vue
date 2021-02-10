@@ -9,7 +9,7 @@
           <div class="col-6 max-vh-100">
             <draggable-blocs :tasks="list"/>
           </div>
-          <div class="col-6 vh-100 bg-dark">
+          <div class="col-6 vh-100 bg-dark p-0">
             <mjml-code-viewer :tasks="list"/>
           </div>
         </div>

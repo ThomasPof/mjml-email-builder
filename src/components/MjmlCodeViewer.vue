@@ -1,28 +1,38 @@
 <template>
   <div class="h-100">
-    <nav class="navbar navbar-dark bg-dark navbar-expand">
+    <nav class="navbar navbar-dark bg-dark navbar-expand" id="preview-navbar">
       <ul class="navbar-nav w-100">
         <li class="nav-item">
-          <a class="nav-link" :class="[view === 'mjml' ? 'active' : '']" href="#" @click.prevent="view = 'mjml'">MJML</a>
+          <a class="nav-link small" :class="[view === 'mjml' ? 'active' : '']" href="#" @click.prevent="view = 'mjml'">MJML</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" :class="[view === 'html' ? 'active' : '']" href="#" @click.prevent="view = 'html';">HTML code</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" :class="[view === 'live' ? 'active' : '']" href="#" @click.prevent="view = 'live';">Live preview</a>
+          <a class="nav-link small" :class="[view === 'html' ? 'active' : '']" href="#" @click.prevent="view = 'html';">HTML</a>
         </li>
         <li class="nav-item ml-auto">
-          <a class="nav-link" href="#" @click.prevent="createHtml(mjmlCode)">Refresh</a>
+          <a class="nav-link small" :class="[view === 'live' && size === '800' ? 'active' : '']" href="#" @click.prevent="view = 'live';size='800'">Desktop</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link small" :class="[view === 'live' && size === '320' ? 'active' : '']" href="#" @click.prevent="view = 'live';size='320'">Mobile</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link small" href="#" @click.prevent="createHtml(mjmlCode)">Refresh</a>
         </li>
       </ul>
 
     </nav>
 
-    <textarea name="" class="form-control bg-dark text-white p-3 w-100" rows="30" v-model="mjmlCode" v-show="view == 'mjml'"></textarea>
+    <div v-show="view == 'mjml'" class="px-3">
+      <textarea name="" class="form-control bg-dark text-white p-3 w-100" rows="30" v-model="mjmlCode" ></textarea>
+    </div>
 
-    <textarea name="" class="form-control bg-dark text-white p-3 w-100" rows="30" v-model="htmlCode" v-show="view == 'html'"></textarea>
+    <div v-show="view == 'html'" class="px-3">
+      <textarea name="" class="form-control bg-dark text-white p-3 w-100" rows="30" v-model="htmlCode"></textarea>
+    </div>
 
-    <iframe class="w-100" :srcdoc="htmlCode" v-show="view == 'live'" height="800px"></iframe>
+    <div v-show="view == 'live'" class="bg-white overflow-hidden" id="iframeWrapper">
+      <iframe class="mw-100 mx-auto d-block" :srcdoc="htmlCode" align="top"></iframe>
+    </div>
+
   </div>
 </template>
 
@@ -40,7 +50,8 @@ export default {
   data() {
     return {
       htmlCode:"",
-      view: 'mjml',
+      view: 'live',
+      size : 800,
     };
   },
   computed: {
@@ -67,6 +78,11 @@ export default {
     },
   },
   watch: {
+    size(targetWidth) {
+      console.log(targetWidth);
+      this.resize();
+
+    },
     mjmlCode(newValue) {
       console.log('update')
       window.localStorage.setItem('savedLayout',JSON.stringify(this.$store.state.list));
@@ -75,7 +91,6 @@ export default {
   },
   methods: {
     createHtml(mjml) {
-
       axios.post("https://api.mjml.io/v1/render", {
         "mjml":"<mjml><mj-body>"+ mjml + "</mj-body></mjml>"
       }, {
@@ -87,11 +102,28 @@ export default {
         console.log(response)
         this.htmlCode = response.data.html
       })
+    },
+    resize() {
+      let iframe = document.querySelector('iframe')
+      let wrapperWidth = document.querySelector('#iframeWrapper').offsetWidth
+      // let iframeScale = 1;
+
+      if(wrapperWidth < this.size) {
+        console.log('trop petit')
+        // iframeScale = wrapperWidth / this.size ;
+      }
+      console.log('ok')
+      // iframe.style.transform = "scale("+ iframeScale +")"
+      iframe.setAttribute('width',this.size)
+      iframe.style.height = window.innerHeight - document.querySelector('#preview-navbar').offsetHeight + 'px';
     }
   },
   mounted() {
     let savedLayout = window.localStorage.getItem('savedLayout');
     this.$store.commit('loadSavedLayout',JSON.parse(savedLayout))
+
+    window.onresize = this.resize;
+    window.onload = this.resize();
   }
 };
 </script>
@@ -99,5 +131,10 @@ export default {
 <style scoped>
 iframe {
   background-color: white;
+  border: 0;
+  -webkit-transform-origin: top center;
+  transform-origin: top center;
+  -webkit-transition: all .25s ease-out;
+  transition: all .25s ease-out;
 }
 </style>
