@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
-      <button type="button" class="btn btn-outline-secondary" @click="showModal = true">Edit</button>
+      <button type="button" class="btn btn-outline-secondary" @click="showModal = true">Options</button>
       <button type="button" class="btn btn-outline-secondary" @click="duplicate(bloc)">Copy</button>
       <button type="button" class="btn btn-outline-secondary" @click="remove(bloc.id)">X</button>
     </div>
@@ -11,27 +11,28 @@
       <!-- <transition name="fade"> -->
         <div class="modal-mask">
           <div class="modal-wrapper" @click.self="showModal = false">
-            <div class="modal-dialog" role="document">
+            <div class="modal-dialog modal-xl" role="document">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title">Edit {{ bloc.name }} </h5>
+                  <h5 class="modal-title">{{ bloc.name }} Options</h5>
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true" @click="showModal = false">&times;</span>
                   </button>
                 </div>
                 <div class="modal-body">
-                  {{ bloc.id }}
                   <form action="">
-                    <div class="form-group" v-for="(option, index) in bloc.options" :key="index">
-                      <label>{{ option.attribute }}</label>
-                      <div class="input-group">
-                        <input type="text" class="form-control" v-model="option.value" :placeholder="option.default">
+                    <div class="row">
+                      <div class="form-group col-12 col-lg-6" v-for="(option, index) in bloc.options" :key="index">
+                        <label>{{ option.attribute }}</label>
+                        <div class="input-group">
+                          <input type="text" class="form-control" v-model="option.value" :placeholder="option.default">
 
-                        <div class="input-group-append">
-                          <span class="input-group-text">{{ option.unit }}</span>
+                          <div class="input-group-append">
+                            <span class="input-group-text">{{ option.unit }}</span>
+                          </div>
                         </div>
+                        <small class="form-text text-muted">{{ option.description }}</small>
                       </div>
-                      <small class="form-text text-muted">{{ option.description }}</small>
                     </div>
                   </form>
                 </div>

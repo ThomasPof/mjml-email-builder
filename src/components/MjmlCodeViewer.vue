@@ -55,6 +55,8 @@ export default {
               }
             }
           tempCode += '>\r\n';
+          if(val.content)
+            tempCode += val.content+'\r\n'
           generateTag(val.tasks)
           tempCode += '</'+val.tag+'>\r\n';
         }

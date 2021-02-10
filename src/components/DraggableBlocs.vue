@@ -10,12 +10,13 @@
     :change="changed"
   >
     <template #item="{ element }">
-      <div class="m-3 border border-secondary bg-white rounded-sm position-relative" :class="element.selfStyle">
+      <div class="m-3 border border-secondary bg-white rounded-sm position-relative" :class="element.selfClass">
         <div class="position-absolute text-gray-600 p-3 d-flex align-items-center justify-content-between w-100" style="top:0; left:0px">
           <p class="text-gray-600 my-0">{{ element.name }}</p>
           <BlocOptions :bloc="element"/>
         </div>
-        <draggable-blocs :tasks="element.tasks" class="pt-5" :class="element.wrapperStyle"/>
+        <draggable-blocs v-if="element.tasks" :tasks="element.tasks" class="pt-5" :class="element.childWrapperClass" />
+        <textarea v-if="element.content !== false" name="" id="" class="form-control mt-5" rows="10" v-model="element.content"></textarea>
       </div>
     </template>
   </draggable>
