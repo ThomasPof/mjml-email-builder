@@ -41,6 +41,7 @@ export default {
 <style lang="scss">
 @import "../node_modules/bootstrap/scss/bootstrap.scss";
 @import "../node_modules/bootstrap-icons/font/bootstrap-icons.css";
+@import "./assets/styles/transitions.css";
 
 .max-vh-100 {
   max-height: 100vh;

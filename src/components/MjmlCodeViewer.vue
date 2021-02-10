@@ -24,16 +24,28 @@
 
     </nav>
 
-    <div v-show="view == 'mjml'" class="px-3">
-      <textarea name="" class="form-control bg-dark text-white p-3 w-100" rows="30" v-model="mjmlCode" ></textarea>
-    </div>
+    <div class="position-relative">
+      <transition name="fade">
+        <div v-show="loading">
+          <div class="position-absolute w-100 h-100 d-flex align-items-center justify-content-center" style="background-color:rgba(0,0,0,0.3)">
+            <div class="spinner-border" role="status">
+              <span class="sr-only">Loading...</span>
+            </div>
+          </div>
+        </div>
+      </transition>
 
-    <div v-show="view == 'html'" class="px-3">
-      <textarea name="" class="form-control bg-dark text-white p-3 w-100" rows="30" v-model="htmlCode"></textarea>
-    </div>
+      <div v-show="view == 'mjml'" class="px-3">
+        <textarea name="" class="form-control bg-dark text-white p-3 w-100" rows="30" v-model="mjmlCode" ></textarea>
+      </div>
 
-    <div v-show="view == 'live'" class="bg-white overflow-hidden" id="iframeWrapper">
-      <iframe class="mw-100 mx-auto d-block" :srcdoc="htmlCode" align="top"></iframe>
+      <div v-show="view == 'html'" class="px-3">
+        <textarea name="" class="form-control bg-dark text-white p-3 w-100" rows="30" v-model="htmlCode"></textarea>
+      </div>
+
+      <div v-show="view == 'live'" class="bg-white overflow-hidden" id="iframeWrapper">
+        <iframe class="mw-100 mx-auto d-block" :srcdoc="htmlCode" align="top"></iframe>
+      </div>
     </div>
 
   </div>
@@ -55,6 +67,7 @@ export default {
       htmlCode:"",
       view: 'live',
       size : 800,
+      loading: false,
     };
   },
   computed: {
@@ -96,6 +109,7 @@ export default {
   },
   methods: {
     createHtml(mjml) {
+      this.loading = true
       axios.post("https://api.mjml.io/v1/render", {
         "mjml":"<mjml><mj-body>"+ mjml + "</mj-body></mjml>"
       }, {
@@ -106,6 +120,7 @@ export default {
       }).then(response => {
         console.log(response)
         this.htmlCode = response.data.html
+        this.loading = false
       })
     },
     resize() {
