@@ -1,0 +1,87 @@
+<template>
+  <div class="h-100">
+    <nav class="navbar navbar-dark bg-dark navbar-expand mt-3">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" :class="[view === 'mjml' ? 'active' : '']" href="#" @click.prevent="view = 'mjml'">MJML</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" :class="[view === 'html' ? 'active' : '']" href="#" @click.prevent="view = 'html';createHtml()">HTML code</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" :class="[view === 'live' ? 'active' : '']" href="#" @click.prevent="view = 'live';createHtml()">Live preview</a>
+        </li>
+
+      </ul>
+    </nav>
+
+    <textarea name="" class="bg-dark text-white p-3 w-100" rows="30" v-model="valueString" v-show="view == 'mjml'">
+
+    </textarea>
+    <textarea name="" class="bg-dark text-white p-3 w-100" rows="30" v-model="htmlCode" v-show="view == 'html'"></textarea>
+
+    <iframe class="w-100" :srcdoc="htmlCode" v-show="view == 'live'"></iframe>
+  </div>
+</template>
+
+<script>
+import axios from "axios";
+
+export default {
+  name: "mjml-code-viewer",
+  props: {
+    tasks: {
+      required: true,
+      type: Array
+    }
+  },
+  data() {
+    return {
+      mjmlCode: "",
+      htmlCode:"",
+      activeNames:"",
+      view: 'mjml',
+    };
+  },
+  computed: {
+    valueString() {
+      let tempCode = "";
+      function generateTag(el) {
+        for (let val of Object.values(el)) {
+          tempCode += '<'+ val.tag +' '
+            for(let option of val.options) {
+              if(option.value) {
+                tempCode += option.attribute +'="'+option.value+'" '
+              }
+            }
+          tempCode += '>\r\n';
+          generateTag(val.tasks)
+          tempCode += '</'+val.tag+'>\r\n';
+        }
+        return tempCode;
+      }
+      // let htmlCode = JSON.stringify(this.tasks, null, 2);
+      return generateTag(Object.values(this.tasks))
+    },
+  },
+  updated() {
+    // console.log(this.valueString);
+  },
+  methods: {
+    createHtml() {
+
+      axios.post("https://api.mjml.io/v1/render", {
+        "mjml":"<mjml><mj-body>"+ this.valueString +"<mj-section><mj-column><mj-text>LAILA</mj-text></mj-column></mj-section></mj-body></mjml>"
+      }, {
+        auth: {
+          username: "cbead1cc-fbef-4171-ad13-67069525c4d6",
+          password: "7b3ec81e-1e60-4c2e-82a7-ce91c1f127d7"
+        }
+      }).then(response => {
+        console.log(response)
+        this.htmlCode = response.data.html
+      })
+    }
+  },
+};
+</script>
