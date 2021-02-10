@@ -1,7 +1,7 @@
 <template>
   <div class="h-100">
     <nav class="navbar navbar-dark bg-dark navbar-expand" id="preview-navbar">
-      <ul class="navbar-nav w-100">
+      <ul class="navbar-nav w-100 d-flex align-items-center">
         <li class="nav-item">
           <a class="nav-link small" :class="[view === 'mjml' ? 'active' : '']" href="#" @click.prevent="view = 'mjml'">MJML</a>
         </li>
@@ -9,13 +9,16 @@
           <a class="nav-link small" :class="[view === 'html' ? 'active' : '']" href="#" @click.prevent="view = 'html';">HTML</a>
         </li>
         <li class="nav-item ml-auto">
-          <a class="nav-link small" :class="[view === 'live' && size === 800 ? 'active' : '']" href="#" @click.prevent="view = 'live';size=800">Desktop</a>
+          <a class="nav-link small" :class="[view === 'live' ? 'active' : '']" href="#" @click.prevent="view = 'live';size=800">Preview</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link small" :class="[view === 'live' && size === 320 ? 'active' : '']" href="#" @click.prevent="view = 'live';size=320">Mobile</a>
+          <a class="nav-link" :class="[view === 'live' && size === 800 ? 'active' : '']" href="#" @click.prevent="view = 'live';size=800"><i class="bi bi-display h5"></i></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link small" href="#" @click.prevent="createHtml(mjmlCode)">Refresh</a>
+          <a class="nav-link" :class="[view === 'live' && size === 320 ? 'active' : '']" href="#" @click.prevent="view = 'live';size=320"><i class="bi bi-phone h5"></i></a>
+        </li>
+        <li class="nav-item ml-auto">
+          <a class="nav-link small" href="#" @click.prevent="createHtml(mjmlCode)"><i class="bi bi-arrow-clockwise h5"></i></a>
         </li>
       </ul>
 

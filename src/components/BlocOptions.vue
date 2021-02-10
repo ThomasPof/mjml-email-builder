@@ -1,9 +1,9 @@
 <template>
   <div>
     <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
-      <button type="button" class="btn btn-outline-secondary" @click="showModal = true">Options</button>
-      <button type="button" class="btn btn-outline-secondary" @click="duplicate(bloc)">Copy</button>
-      <button type="button" class="btn btn-outline-secondary" @click="remove(bloc.id)">X</button>
+      <button type="button" class="btn btn-outline-secondary" @click="showModal = true"><i class="bi bi-gear-fill"></i></button>
+      <button type="button" class="btn btn-outline-secondary" @click="duplicate(bloc)"><i class="bi bi-files"></i></button>
+      <button type="button" class="btn btn-outline-secondary" @click="remove(bloc.id)"><i class="bi bi-trash"></i></button>
     </div>
 
     <!-- Modal -->

@@ -62,7 +62,9 @@ export default {
       })
     },
     addLayout: function(layout) {
-      this.$store.commit('addLayout', layout)
+      alert('Coming soon...')
+      console.log('Layout',layout);
+      // this.$store.commit('addLayout', layout)
     },
   },
   computed: {
