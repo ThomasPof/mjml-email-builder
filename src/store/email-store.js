@@ -833,18 +833,8 @@ const store = createStore({
    },
    mutations: {
       remove (state, idx) {
-         console.log('id to delete',idx)
-         console.log('list',state.list)
-
-         // for (let el of state.list) {
-            // console.log(state.list.find(x => x.id === idx));
-         // }
-         // state.list.splice(idx, 1);
-
          function findElement(all,idx) {
             for (let index in all) {
-               console.log('index',all[index])
-               console.log('idx',idx)
                if(all[index].id === idx) {
                   all.splice(index,1)
                   break
@@ -856,7 +846,6 @@ const store = createStore({
          findElement(state.list,idx)
       },
       addComponent(state, element) {
-         console.log('Added Element',element)
          let tempEl = cloneDeep(store.getters.getModelByTag(element.tag))
          tempEl.id = cloneDeep(state.currentId)
          state.list.push(tempEl)
@@ -887,7 +876,6 @@ const store = createStore({
          // state.currentId++
       },
       duplicate(state, bloc) {
-         console.log('duplicate Element')
          let tempEl = cloneDeep(bloc)
          tempEl.id = cloneDeep(state.currentId)
          state.list.push(tempEl)
