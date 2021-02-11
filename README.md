@@ -32,4 +32,3 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 - j'arrive pas à drag directement de la colonne de gauche au milieu
 - code beautify
 - better code highlight (with codemirror ?)
-- something to show/hide panels
