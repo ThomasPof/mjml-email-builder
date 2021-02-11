@@ -24,7 +24,7 @@
 
     </nav>
 
-    <div class="position-relative">
+    <div class="position-relative overflow-hidden" id="iframeWrapper">
       <transition name="fade">
         <div v-show="loading">
           <div class="position-absolute w-100 h-100 d-flex align-items-center justify-content-center" style="background-color:rgba(0,0,0,0.3)">
@@ -43,7 +43,7 @@
         <textarea name="" class="form-control bg-dark text-white p-3 w-100" rows="30" v-model="htmlCode"></textarea>
       </div>
 
-      <div v-show="view == 'live'" class="bg-white overflow-hidden" id="iframeWrapper">
+      <div v-show="view == 'live'" class="bg-white">
         <iframe class="mw-100 mx-auto d-block" :srcdoc="htmlCode" align="top"></iframe>
       </div>
     </div>
@@ -125,6 +125,7 @@ export default {
     },
     resize() {
       let iframe = document.querySelector('iframe')
+      let iframeWrapper = document.querySelector('#iframeWrapper')
       // let wrapperWidth = document.querySelector('#iframeWrapper').offsetWidth
       // let iframeScale = 1;
 
@@ -135,6 +136,7 @@ export default {
       // console.log('ok')
       // iframe.style.transform = "scale("+ iframeScale +")"
       iframe.setAttribute('width',this.size)
+      iframeWrapper.style.height = window.innerHeight - document.querySelector('#preview-navbar').offsetHeight + 'px';
       iframe.style.height = window.innerHeight - document.querySelector('#preview-navbar').offsetHeight + 'px';
     }
   },
