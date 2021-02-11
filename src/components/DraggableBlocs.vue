@@ -12,7 +12,8 @@
     <template #item="{ element }">
       <div class="m-3 border border-secondary bg-white position-relative" :class="element.selfClass">
         <div class="position-absolute bg-dark text-white py-2 px-3 d-flex align-items-center justify-content-between w-100" style="top:0; left:0px">
-          <p class="text-white my-0">{{ element.name }}</p>
+          <!-- <p class="text-white my-0">{{ element.name }}</p> -->
+          <input type="text" class="form-control bg-dark text-white form-control-sm border-0 w-50" v-model="element.name">
           <BlocOptions :bloc="element"/>
         </div>
         <draggable-blocs v-if="element.tasks" :tasks="element.tasks" class="pt-5" :class="element.childWrapperClass" />
