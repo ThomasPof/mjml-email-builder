@@ -26,7 +26,7 @@
 
     <div class="position-relative overflow-hidden full-height">
       <transition name="fade">
-        <div v-show="loading">
+        <div v-show="loading && view != 'mjml'">
           <div class="position-absolute w-100 h-100 d-flex align-items-center justify-content-center" style="background-color:rgba(0,0,0,0.5)">
             <div class="spinner-border text-warning" role="status">
               <span class="sr-only">Loading...</span>
@@ -37,17 +37,13 @@
 
       <div v-show="view == 'mjml'" class="small">
         <pre v-highlightjs >
-          <code class="html full-height">
-            {{ mjmlCode }}
-          </code>
+          <code class="html full-height">{{ mjmlCode }}</code>
         </pre>
       </div>
 
       <div v-show="view == 'html'" class="small">
         <pre v-highlightjs >
-          <code class="html full-height">
-            {{ htmlCode }}
-          </code>
+          <code class="html full-height">{{ htmlCode }}</code>
         </pre>
       </div>
 
@@ -86,7 +82,7 @@ export default {
           tempCode += '<'+ val.tag
             for(let option of val.options) {
               if(option.value) {
-                tempCode += " "+option.attribute +'="'+option.value+'"'
+                tempCode += "\r\n" + option.attribute +'="'+option.value+'"'
               }
             }
           tempCode += '>\r\n';
@@ -97,7 +93,6 @@ export default {
         }
         return tempCode;
       }
-      // let htmlCode = JSON.stringify(this.tasks, null, 2);
       return generateTag(Object.values(this.tasks))
     },
   },
