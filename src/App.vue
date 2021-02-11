@@ -1,10 +1,10 @@
 <template>
   <div class="container-fluid">
     <div class="row">
-      <div class="col-auto bg-light min-vh-100">
+      <div class="col-2 bg-light min-vh-100">
         <sidebar/>
       </div>
-      <div class="col">
+      <div class="col-10">
         <div class="row">
           <div class="col-6 max-vh-100">
             <draggable-blocs :tasks="list"/>
@@ -39,8 +39,12 @@ export default {
 </script>
 
 <style lang="scss">
+@import "./assets/styles/variables.scss";
+
 @import "../node_modules/bootstrap/scss/bootstrap.scss";
 @import "../node_modules/bootstrap-icons/font/bootstrap-icons.css";
+
+@import "./assets/styles/utilities.scss";
 @import "./assets/styles/transitions.css";
 
 .max-vh-100 {

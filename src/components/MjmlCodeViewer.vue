@@ -1,6 +1,6 @@
 <template>
   <div class="h-100">
-    <nav class="navbar navbar-dark bg-dark navbar-expand" id="preview-navbar">
+    <nav class="navbar navbar-dark bg-darken navbar-expand" id="preview-navbar">
       <ul class="navbar-nav w-100 d-flex align-items-center">
         <li class="nav-item">
           <a class="nav-link small" :class="[view === 'mjml' ? 'active' : '']" href="#" @click.prevent="view = 'mjml'">MJML</a>
@@ -24,7 +24,7 @@
 
     </nav>
 
-    <div class="position-relative overflow-hidden" id="iframeWrapper">
+    <div class="position-relative overflow-hidden full-height">
       <transition name="fade">
         <div v-show="loading">
           <div class="position-absolute w-100 h-100 d-flex align-items-center justify-content-center" style="background-color:rgba(0,0,0,0.3)">
@@ -35,16 +35,24 @@
         </div>
       </transition>
 
-      <div v-show="view == 'mjml'" class="px-3">
-        <textarea name="" class="form-control bg-dark text-white p-3 w-100" rows="30" v-model="mjmlCode" ></textarea>
+      <div v-show="view == 'mjml'" class="small">
+        <pre v-highlightjs >
+          <code class="html full-height">
+            {{ mjmlCode }}
+          </code>
+        </pre>
       </div>
 
-      <div v-show="view == 'html'" class="px-3">
-        <textarea name="" class="form-control bg-dark text-white p-3 w-100" rows="30" v-model="htmlCode"></textarea>
+      <div v-show="view == 'html'" class="small">
+        <pre v-highlightjs >
+          <code class="html full-height">
+            {{ htmlCode }}
+          </code>
+        </pre>
       </div>
 
       <div v-show="view == 'live'" class="bg-white">
-        <iframe class="mw-100 mx-auto d-block" :srcdoc="htmlCode" align="top"></iframe>
+        <iframe class="mw-100 mx-auto d-block full-height" :srcdoc="htmlCode" align="top"></iframe>
       </div>
     </div>
 
@@ -125,19 +133,14 @@ export default {
     },
     resize() {
       let iframe = document.querySelector('iframe')
-      let iframeWrapper = document.querySelector('#iframeWrapper')
-      // let wrapperWidth = document.querySelector('#iframeWrapper').offsetWidth
-      // let iframeScale = 1;
-
-      // if(wrapperWidth < this.size) {
-        // console.log('trop petit')
-        // iframeScale = wrapperWidth / this.size ;
-      // }
-      // console.log('ok')
-      // iframe.style.transform = "scale("+ iframeScale +")"
+      let fullHeight = document.querySelectorAll('.full-height')
       iframe.setAttribute('width',this.size)
-      iframeWrapper.style.height = window.innerHeight - document.querySelector('#preview-navbar').offsetHeight + 'px';
-      iframe.style.height = window.innerHeight - document.querySelector('#preview-navbar').offsetHeight + 'px';
+
+      console.log(fullHeight);
+
+      Array.from(fullHeight).forEach(el => {
+        el.style.height = window.innerHeight - document.querySelector('#preview-navbar').offsetHeight + 'px';
+      })
     }
   },
   mounted() {
@@ -154,6 +157,8 @@ export default {
 </script>
 
 <style scoped>
+@import '../../node_modules/highlight.js/styles/atom-one-dark.css';
+
 iframe {
   background-color: white;
   border: 0;
