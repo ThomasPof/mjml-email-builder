@@ -1,4 +1,6 @@
-# dragndrop-email-builder
+# mjml-email-builder
+
+This project is to provide an easy way to build emails from drag and drop interface. It's based on MJML syntax, which provide easy-reading code and nice and responsive HTML. Have fun with it !
 
 ## Project setup
 ```
@@ -23,8 +25,11 @@ yarn lint
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
 
-##TODO
+## TODO
 - quand on duplique une section, l'avoir juste en dessous pas à la fin
 - possiblité de renommer les sections dasn la colonne centrale pour les retrouver
 - possibilité de les plier (genre flèche accordéon)
 - j'arrive pas à drag directement de la colonne de gauche au milieu
+- code beautify
+- better code highlight (with codemirror ?)
+- something to show/hide panels
