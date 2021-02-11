@@ -27,8 +27,8 @@
     <div class="position-relative overflow-hidden full-height">
       <transition name="fade">
         <div v-show="loading">
-          <div class="position-absolute w-100 h-100 d-flex align-items-center justify-content-center" style="background-color:rgba(0,0,0,0.3)">
-            <div class="spinner-border" role="status">
+          <div class="position-absolute w-100 h-100 d-flex align-items-center justify-content-center" style="background-color:rgba(0,0,0,0.5)">
+            <div class="spinner-border text-warning" role="status">
               <span class="sr-only">Loading...</span>
             </div>
           </div>
@@ -83,10 +83,10 @@ export default {
       let tempCode = "";
       function generateTag(el) {
         for (let val of Object.values(el)) {
-          tempCode += '<'+ val.tag +' '
+          tempCode += '<'+ val.tag
             for(let option of val.options) {
               if(option.value) {
-                tempCode += option.attribute +'="'+option.value+'" '
+                tempCode += " "+option.attribute +'="'+option.value+'"'
               }
             }
           tempCode += '>\r\n';
