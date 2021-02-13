@@ -31,6 +31,5 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 - j'arrive pas à drag directement de la colonne de gauche au milieu
 - code beautify
 - better code highlight (with codemirror ?)
-- styliser les blocs de drag and drop
 - fixer le focus out dès qu'on keydown sur le nom de la section
 - watch le mjml to trigger un save

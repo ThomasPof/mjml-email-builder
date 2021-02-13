@@ -8,12 +8,12 @@
         <div class="row">
           <div class="vh-100 pr-4 position-relative" :class="'col-' + layout" v-show="layout > 0">
             <draggable-blocs :tasks="list"/>
-            <button type="button" @click="resizeLayout(-3)" class="btn btn-dark btn-sm h-100 top-0 right-0 rounded-0 z-1000 px-0 position-absolute">
+            <button type="button" @click="resizeLayout(-6)" class="btn btn-dark btn-sm h-100 top-0 right-0 rounded-0 z-1000 px-0 position-absolute">
               <i class="bi bi-arrow-bar-left"></i>
             </button>
           </div>
           <div class="vh-100 bg-dark p-0 pl-3 position-relative" :class="'col-' + (12 - layout)" v-show="layout < 12">
-            <button type="button" @click="resizeLayout(+3)" class="btn btn-dark btn-sm h-100 top-0 left-0 rounded-0 z-1000 px-0 position-absolute">
+            <button type="button" @click="resizeLayout(+6)" class="btn btn-dark btn-sm h-100 top-0 left-0 rounded-0 z-1000 px-0 position-absolute">
               <i class="bi bi-arrow-bar-right"></i>
             </button>
             <mjml-code-viewer :tasks="list"/>
