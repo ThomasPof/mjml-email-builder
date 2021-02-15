@@ -11,6 +11,7 @@ const store = createStore({
             name: "Section",
             tag: "mj-section",
             selfClass: "",
+            childOf: "",
             childWrapperClass: "d-flex",
             options: [
                {
@@ -154,6 +155,7 @@ const store = createStore({
             tag: "mj-column",
             selfClass: "flex flex-fill",
             childWrapperClass: "",
+            childOf: "mj-section mj-wrapper",
             options: [
                {
                   "attribute": "background-color",
@@ -316,6 +318,7 @@ const store = createStore({
             name: "Texte",
             tag: "mj-text",
             selfClass: "p-3 pt-5",
+            childOf: "mj-column",
             childWrapperClass: "",
             options: [
                {
@@ -474,6 +477,7 @@ const store = createStore({
             tag: "mj-image",
             selfClass: "p-3 pt-5",
             childWrapperClass: "",
+            childOf: "mj-column",
             tasks: false,
             options: [
                {
@@ -630,6 +634,7 @@ const store = createStore({
             tag: "mj-button",
             selfClass: "p-3 pt-5",
             childWrapperClass: "",
+            childOf: "mj-column",
             tasks: false,
             content: "Don't click me!",
             options: [
@@ -854,22 +859,22 @@ const store = createStore({
       },
       addLayout(state, layout) {
          console.log('Added Layout',layout)
-         let tempLayout = []
-         function buildLayout(elements,parent) {
-            for (let element of elements) {
-               let tempEl = cloneDeep(store.getters.getModelByTag(element.tag))
-               console.log('tempEl',element)
-               tempEl.id = cloneDeep(state.currentId)
-               state.currentId++
-               parent.push(tempEl)
-               for (let subElement of Object.entries(element.child)) {
-                  buildLayout(subElement);
-               }
-            }
-         }
-         buildLayout(layout,tempLayout)
-         state.list.push(tempLayout)
-         console.log('tempLayout',tempLayout)
+         // let tempLayout = []
+         // function buildLayout(elements,parent) {
+         //    for (let element of elements) {
+         //       let tempEl = cloneDeep(store.getters.getModelByTag(element.tag))
+         //       console.log('tempEl',element)
+         //       tempEl.id = cloneDeep(state.currentId)
+         //       state.currentId++
+         //       parent.push(tempEl)
+         //       for (let subElement of Object.entries(element.child)) {
+         //          buildLayout(subElement);
+         //       }
+         //    }
+         // }
+         // buildLayout(layout,tempLayout)
+         state.list.push(JSON.parse(layout))
+         // console.log('tempLayout',tempLayout)
          // let tempEl = cloneDeep(store.getters.getModelByTag(element.tag))
          // let id = cloneDeep(state.currentId)
          // tempEl.id = id
