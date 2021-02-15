@@ -36,7 +36,7 @@
                 </form>
               </div>
               <div class="modal-footer">
-                <button type="button" class="btn btn-primary" @click="showModal = false">Valider</button>
+                <button type="button" class="btn btn-primary text-white" @click="showModal = false">Valider</button>
               </div>
             </div>
           </div>

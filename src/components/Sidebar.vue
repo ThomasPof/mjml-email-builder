@@ -1,7 +1,7 @@
 <template>
   <div>
-    <p class="font-weight-bold px-2 pt-3 pb-2 mb-0">Options</p>
-    <nav class="navbar navbar-light bg-light">
+    <p class="d-block p-3 bg-primary text-white">MJML Builder</p>
+    <nav class="navbar navbar-light bg-light px-4">
       <ul class="navbar-nav">
         <li class="nav-item">
           <a href="#" class="nav-link" @click.prevent="resetBuilder()">Nouveau projet</a>
@@ -11,17 +11,16 @@
         </li>
       </ul>
     </nav>
-    <hr>
-    <p class="font-weight-bold px-2 pt-3 pb-2 mb-0">Composants</p>
-    <nav class="navbar navbar-light bg-light">
+    <p class="font-weight-bold px-3 pt-3 pb-2 mb-0 small text-uppercase">Components</p>
+    <nav class="navbar navbar-light bg-light px-4">
       <ul class="navbar-nav">
         <li class="nav-item" v-for="component in mjmlComponents" :key="component">
           <a href="#" class="nav-link" @click.prevent="addComponent(component.tag)">{{ component.name }}</a>
         </li>
       </ul>
     </nav>
-    <p class="font-weight-bold px-2 pt-3 pb-2 mb-0">Layouts</p>
-    <nav class="navbar navbar-light bg-light">
+    <p class="font-weight-bold px-3 pt-3 pb-2 mb-0 small text-uppercase">pre-built sections</p>
+    <nav class="navbar navbar-light bg-light px-4">
       <ul class="navbar-nav">
         <li class="nav-item" v-for="layout in layouts" :key="layout">
           <a href="#" class="nav-link" @click.prevent="addLayout(layout.layout)">{{ layout.name }}</a>
