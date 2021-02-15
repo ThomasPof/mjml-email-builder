@@ -33,3 +33,5 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 - better code highlight (with codemirror ?)
 - fixer le focus out dès qu'on keydown sur le nom de la section
 - watch le mjml to trigger un save
+- compter le nombre de blocks ajoutés/dupliqués pour mettre à jour l'index
+
