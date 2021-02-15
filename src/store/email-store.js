@@ -886,6 +886,10 @@ const store = createStore({
          state.list = data.list
          console.log('parseInt in store',data.id)
          state.currentId = parseInt(data.id)
+      },
+      reset(state) {
+         state.list = []
+         state.currentId = 0
       }
    },
    getters: {
