@@ -8,6 +8,8 @@
     ghost-class="border-success"
     :move="checkMove"
     :change="changed"
+    animation="150"
+    easing="cubic-bezier(1, 0, 0, 1)"
   >
     <template #item="{ element }">
       <div class="m-3 border border-secondary bg-white position-relative" :class="element.selfClass">
@@ -53,7 +55,19 @@ export default {
     checkMove: (evt) => {
       console.log('checkMove',evt)
       console.log(this)
-      // Here to check if it's allowed
+      // Example: https://jsbin.com/nawahef/edit?js,output
+      console.log(evt.to.classList); // dragged HTMLElement
+      // console.log(evt.draggedRect); // DOMRect {left, top, right, bottom}
+      // console.log(evt.related); // HTMLElement on which have guided
+      // console.log(evt.relatedRect); // DOMRect
+      // console.log(evt.willInsertAfter); // Boolean that is true if Sortable will insert drag element after target by default
+      // console.log(originalEvent.clientY); // mouse position
+      // return false; — for cancel
+      // return -1; — insert before target
+      // return 1; — insert after target
+      // return true; — keep default insertion point based on the direction
+      // return void; — keep default insertion point based on the direction
+        // Here to check if it's allowed
     },
     moved: () => {
     }

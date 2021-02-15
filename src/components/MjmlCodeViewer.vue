@@ -28,7 +28,7 @@
       <transition name="fade">
         <div v-show="loading && view != 'mjml'">
           <div class="position-absolute w-100 h-100 d-flex align-items-center justify-content-center" style="background-color:rgba(0,0,0,0.5)">
-            <div class="spinner-border text-warning" role="status">
+            <div class="spinner-border text-primary" role="status">
               <span class="sr-only">Loading...</span>
             </div>
           </div>
