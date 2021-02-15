@@ -57,6 +57,7 @@
 
 <script>
 import axios from "axios";
+import { indent } from 'indent.js'
 
 export default {
   name: "mjml-code-viewer",
@@ -93,7 +94,11 @@ export default {
         }
         return tempCode;
       }
-      return generateTag(Object.values(this.tasks))
+      return indent.html(
+        "<mjml>\r\n<mj-body>\r\n" + generateTag(Object.values(this.tasks)) + "</mj-body>\r\n</mjml>",
+        {
+          tabString: "  "
+        });
     },
   },
   watch: {
@@ -114,7 +119,7 @@ export default {
     createHtml(mjml) {
       this.loading = true
       axios.post("https://api.mjml.io/v1/render", {
-        "mjml":"<mjml><mj-body>"+ mjml + "</mj-body></mjml>"
+        "mjml":mjml
       }, {
         auth: {
           username: "cbead1cc-fbef-4171-ad13-67069525c4d6",
@@ -142,6 +147,7 @@ export default {
     let savedLayout = window.localStorage.getItem('savedLayout');
     let savedId = window.localStorage.getItem('savedId');
     if(savedId && savedLayout) {
+      console.log('saved ready')
       this.$store.commit('loadSavedLayout',{list:JSON.parse(savedLayout),id: savedId})
     }
 
