@@ -150,7 +150,7 @@ export default {
       this.$store.commit('loadSavedLayout',{list:JSON.parse(savedLayout),id: savedId})
     }
 
-    window.onresize = this.resize;
+    window.onresize = this.resize();
     window.onload = this.resize();
   }
 };
