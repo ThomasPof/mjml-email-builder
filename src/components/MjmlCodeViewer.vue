@@ -94,8 +94,7 @@ export default {
         }
         return tempCode;
       }
-      return indent.html(
-        "<mjml>\r\n<mj-body>\r\n" + generateTag(Object.values(this.tasks)) + "</mj-body>\r\n</mjml>",
+      return indent.html("<mjml>\r\n<mj-body>\r\n" + generateTag(Object.values(this.tasks)) + "</mj-body>\r\n</mjml>",
         {
           tabString: "  "
         });
