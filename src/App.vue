@@ -7,8 +7,9 @@
       <div class="col-9 col-xl-10">
         <div class="row">
           <div class="vh-100 pr-3 pl-0 position-relative" :class="'col-' + layout" v-show="layout > 0">
-
-            <draggable-blocs :tasks="list"/>
+            <div class="overflow-scroll h-100">
+              <draggable-blocs :tasks="list"/>
+            </div>
             <button type="button" @click="resizeLayout(-6)" class="btn btn-secondary btn-sm h-100 top-0 right-0 rounded-0 z-1000 px-0 position-absolute">
               <i class="bi bi-arrow-bar-left"></i>
             </button>
